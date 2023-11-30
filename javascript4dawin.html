@@ -15,6 +15,7 @@
     box-shadow: 5px;
     text-align: center;
     transition: 0.1s;
+    display: 'flex';
   }
 
   .coolbutton:active {
@@ -67,9 +68,23 @@
     bottom: 0;
     transition: height 0.5s ease-in-out;
   }
+
+  .levelIndicator {
+    color: white;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    text-align: left;
+    font-size: 20px;
+    position: fixed;
+    margin: 5px 0 0 10px;
+  }
+
 </style>
 
 <body>
+
+    <p class="levelIndicator">
+      Level 1
+    </p>
   <div class="mainbutton">
     <button class="coolbutton" onclick="circleDrop(); startDelay();">
       <p class="bigtext">Make it rain!</p>
@@ -78,6 +93,7 @@
   </div>
 
   <div id="whiteBox"></div>
+
 
   <script>
     let height = 1;
@@ -130,6 +146,12 @@
       const whiteBox = document.getElementById('whiteBox');
       height += 2;
       whiteBox.style.height = height + 'px';
+
+      // Reset snow level
+      if (height >= 10)
+      {
+        height = 1;
+      }
     }
   </script>
 </body>
