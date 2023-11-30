@@ -69,13 +69,13 @@
     transition: height 0.5s ease-in-out;
   }
 
-  .levelIndicator {
+  .mainStats {
     color: white;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     text-align: left;
     font-size: 20px;
     position: fixed;
-    margin: 5px 0 0 10px;
+    margin: 3px 0 0 10px;
   }
 
   .levelNumber {
@@ -83,12 +83,19 @@
     color: aqua;
   }
 
+  .coinsNumber {
+    font-size: 25px;
+    color: gold;
+  }
+
+
 </style>
 
 <body>
 
-    <p class="levelIndicator">
-      Level <span class="levelNumber">1</span>
+    <p class="mainStats">
+      Level <span class="levelNumber">1</span><br>
+      Coins: <span class="coinsNumber">0</span>
     </p>
   <div class="mainbutton">
     <button class="coolbutton" onclick="circleDrop(); startDelay();">
@@ -172,7 +179,18 @@
 
         // Update the content with the new level number
         levelNumberElement.textContent = newLevel;
+
+        // get coins
+        coinsIncrease();
       }
+
+      function coinsIncrease() {
+        var coinNumberElement = document.querySelector('.coinsNumber');
+        var currentCoins = parseInt(coinNumberElement.textContent);
+        var newCoinAmount = currentCoins + 50;
+        coinNumberElement.textContent = newCoinAmount;
+      }
+
   </script>
 </body>
 
