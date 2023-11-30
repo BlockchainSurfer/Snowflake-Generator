@@ -78,12 +78,17 @@
     margin: 5px 0 0 10px;
   }
 
+  .levelNumber {
+    font-size: 25px;
+    color: aqua;
+  }
+
 </style>
 
 <body>
 
     <p class="levelIndicator">
-      Level 1
+      Level <span class="levelNumber">1</span>
     </p>
   <div class="mainbutton">
     <button class="coolbutton" onclick="circleDrop(); startDelay();">
@@ -148,11 +153,26 @@
       whiteBox.style.height = height + 'px';
 
       // Reset snow level
-      if (height >= 10)
+      if (height >= 100)
       {
         height = 1;
+        increaseLevel();
       }
     }
+
+    function increaseLevel() {
+        // Get the element containing the level number by its class
+        var levelNumberElement = document.querySelector('.levelNumber');
+
+        // Get the current level number
+        var currentLevel = parseInt(levelNumberElement.textContent);
+
+        // Increase the level by one
+        var newLevel = currentLevel + 1;
+
+        // Update the content with the new level number
+        levelNumberElement.textContent = newLevel;
+      }
   </script>
 </body>
 
