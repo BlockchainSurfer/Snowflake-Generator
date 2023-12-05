@@ -16,16 +16,18 @@
     text-align: center;
     transition: 0.1s;
     display: 'flex';
+    margin-top: 0;
+    background-color: whitesmoke;
   }
 
   .coolbutton:active {
-    background-color: darkgray;
+    background-color: lightgray;
     transition: 0.2s;
     transform: scale(95%);
   }
 
   .coolbutton:hover {
-    background-color: lightgray;
+    background-color: lightgrey;
   }
 
   .mainbutton {
@@ -88,6 +90,66 @@
     color: gold;
   }
 
+  .button-container {
+        border: 1px solid #ccc;
+        padding: 20px;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 150px;
+        height: 30px;
+        background-color: #434343;
+        border-radius: 5px;
+        border: transparent;
+        padding: 18px 24px;
+        right: 8px;
+        top: 10px;
+        position: fixed;
+      }
+
+      .button {
+        padding: 0 18px;
+        font-size: 13px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin: 5px 5px;
+        border: transparent;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        transition: 0.2s;
+        background-color: whitesmoke;
+        width: 94px;
+        height: 55px;
+        text-align: center;
+        
+      }
+
+      .button:hover {
+        background-color: lightgray;
+        transform: scale(103%);
+        transition: 0.3s;
+      }
+
+      .overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
 
 </style>
 
@@ -104,6 +166,17 @@
     </button>
   </div>
 
+  <div class="button-container">
+    <button class="button" onclick="upgradeDensity()">Upgrade Snowflake Density</button>
+    <button class="button" onclick="buttonClicked(2)">Button 2</button>
+  </div>
+
+  <div class="overlay" id="overlay">
+    <div class="message">
+        <p>Please resize your window to meet the required dimensions. Thanks! :)</p>
+    </div>
+</div>
+
   <div id="whiteBox"></div>
 
 
@@ -112,6 +185,7 @@
     let lastClickTime = 0;
     let snowflakes = 0;
     let snowTime = 4200;
+    let snowflakeDensity = 5;
 
     function circleDrop() {
       const fallingCircle = document.createElement('img');
@@ -156,7 +230,7 @@
 
     function expandBox() {
       const whiteBox = document.getElementById('whiteBox');
-      height += 2;
+      height += snowflakeDensity;
       whiteBox.style.height = height + 'px';
 
       // Reset snow level
@@ -165,6 +239,7 @@
         height = 1;
         increaseLevel();
       }
+      
     }
 
     function increaseLevel() {
@@ -190,6 +265,38 @@
         var newCoinAmount = currentCoins + 50;
         coinNumberElement.textContent = newCoinAmount;
       }
+
+      function checkWindowSize() {
+    const minWidth = 700; // Minimum width required
+    const minHeight = 700; // Minimum height required
+
+    const currentWidth = window.innerWidth;
+    const currentHeight = window.innerHeight;
+
+    if (currentWidth < minWidth || currentHeight < minHeight) {
+        document.getElementById('overlay').style.display = 'block';
+        // Disable interactions
+        document.body.style.pointerEvents = 'none';
+    } else {
+        document.getElementById('overlay').style.display = 'none';
+        // Enable interactions
+        document.body.style.pointerEvents = 'auto';
+    }
+}
+
+// Check window size on load and resize
+window.addEventListener('load', checkWindowSize);
+window.addEventListener('resize', checkWindowSize);
+
+function upgradeDensity() {
+  var coinNumberElement = document.querySelector('.coinsNumber');
+  var currentCoins = parseInt(coinNumberElement.textContent);
+  
+  if (currentCoins >= 10) {
+    var newCoinAmount = currentCoins - 10;
+    coinNumberElement.textContent = newCoinAmount;
+  }
+}
 
   </script>
 </body>
