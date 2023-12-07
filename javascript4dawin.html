@@ -42,6 +42,7 @@
     animation: fall 4.5s linear forwards;
     visibility: hidden;
   }
+  
 
   .bigtext {
     font-size: 35px;
@@ -151,6 +152,35 @@
     text-align: center;
 }
 
+.progress-container {
+            width: 250px;
+            height: 25px;
+            border: 1px solid #000;
+            position: absolute;
+            top: 110px; /* Adjust this value to position the progress bar */
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0;
+            height: 100%;
+            background-color: gold;
+            border-radius: 8px;
+            transition: width 0.3s ease-in-out;
+        }
+
+        .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 20px;
+      color: white;
+    }
+
 </style>
 
 <body>
@@ -160,15 +190,20 @@
       Coins: <span class="coinsNumber">0</span>
     </p>
   <div class="mainbutton">
-    <button class="coolbutton" onclick="circleDrop(); startDelay();">
+    <button class="coolbutton" onclick="circleDrop(); startDelay(); increaseProgress()">
       <p class="bigtext">Make it rain!</p>
       <p class="smalltext">(it's cold outside)</p>
     </button>
   </div>
 
+  <div class="progress-container">
+    <div class="progress-text">30</div>
+    <div class="progress-bar" id="progressBar"></div>
+</div>
+
   <div class="button-container">
-    <button class="button" onclick="upgradeDensity()">Upgrade Snowflake Density</button>
-    <button class="button" onclick="buttonClicked(2)">Button 2</button>
+    <button class="button" onclick="upgradeDensity()">Upgrade Snowflake Power</button>
+    <button class="button" onclick="buttonClicked(2)">Upgrade Bonus Bar</button>
   </div>
 
   <div class="overlay" id="overlay">
@@ -297,6 +332,16 @@ function upgradeDensity() {
     coinNumberElement.textContent = newCoinAmount;
   }
 }
+
+function increaseProgress() {
+            const progressBar = document.getElementById('progressBar');
+            let currentWidth = parseInt(progressBar.style.width) || 0;
+            currentWidth += 2;
+            if (currentWidth <= 100) {
+                progressBar.style.width = currentWidth + '%';
+            }
+        }
+
 
   </script>
 </body>
