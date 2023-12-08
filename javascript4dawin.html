@@ -91,6 +91,11 @@
     color: gold;
   }
 
+    .tempNumber {
+        font-size: 25px;
+        color: red;
+    }
+
   .button-container {
         border: 1px solid #ccc;
         padding: 20px;
@@ -206,7 +211,7 @@
             height: 25px;
             border: 1px solid #000;
             position: absolute;
-            top: 110px; /* Adjust this value to position the progress bar */
+            top: 110px;
             left: 50%;
             transform: translateX(-50%);
             border-radius: 10px;
@@ -247,7 +252,7 @@
         .priceNumber1 {
             position: fixed;
             right: 156px;
-            top: 74px;
+            top: 73px;
             color: gold;
             font-size: 17px;
         }
@@ -255,10 +260,48 @@
     .priceNumber2 {
         position: fixed;
         right: 53px;
-        top: 74px;
+        top: 73px;
         color: gold;
         font-size: 17px;
     }
+
+    .upgradeLevelStyle1 {
+        color: whitesmoke;
+        font-size: 17px;
+        position: fixed;
+        right: 144px;
+        top: 93px;
+    }
+
+    .upgradeLevelStyle2 {
+        color: whitesmoke;
+        font-size: 17px;
+        position: fixed;
+        right: 42px;
+        top: 93px;
+    }
+
+    .upgradeLevelSP {
+        font-size: 20px;
+    }
+
+    .upgradeLevelBB {
+        font-size: 20px;
+    }
+
+    .greyBlock {
+        background-color: #212121;
+        position: fixed;
+        height: 35px;
+        width: 120px;
+        top: 75px;
+        left: 1px;
+    }
+
+    .smth {
+        font-size: 25px;
+    }
+
 
 </style>
 
@@ -266,8 +309,12 @@
 
     <p class="mainStats">
         Level <span class="levelNumber">1</span><br>
-        Coins: <span class="coinsNumber">0</span>
+        Coins: <span class="coinsNumber">0</span><br>
+        Temp: <span class="tempNumber">0</span><span class="smth">&#xb0;</span>
     </p>
+
+    <div class="greyBlock" id="blockToHide"></div>
+
     <div class="mainbutton">
         <button class="coolbutton" onclick="circleDrop(); startDelay(); increaseProgress()">
             <p class="bigtext">Make it rain!</p>
@@ -285,7 +332,7 @@
     <div class="blackBox1"></div>
     <div class="blackBox2"></div>
     <button class="button1" onclick="upgradeDensity()">Upgrade Snowflake Power</button>
-    <button class="button2" onclick="buttonClicked(2)">Upgrade Bonus Bar</button>
+    <button class="button2" onclick="upgradeBB()">Upgrade Bonus Bar</button>
 
     <span class="priceNumber1">
         50
@@ -293,6 +340,13 @@
     <span class="priceNumber2">
         20
     </span>
+
+    <div class="upgradeLevelStyle1">
+        Lvl. <span class="upgradeLevelSP">1</span>
+    </div>
+    <div class="upgradeLevelStyle2">
+        Lvl. <span class="upgradeLevelBB">1</span>
+    </div>
 
     <div class="overlay" id="overlay">
         <div class="message">
@@ -311,6 +365,7 @@
         let snowflakes = 0;
         let snowTime = 4200;
         let snowflakeDensity = 5;
+        let bonusCoinAmount = 5
 
         function circleDrop() {
             const fallingCircle = document.createElement('img');
@@ -330,7 +385,7 @@
                 snowflakes--;
 
                 if (snowflakes === 0) {
-                    expandBox();
+
                     fallingCircle.remove(); // Free up Memory
                 }
             });
@@ -338,20 +393,40 @@
         }
 
         function startDelay() {
-
             const currentTime = new Date().getTime();
             const timeDiff = currentTime - lastClickTime;
 
-            if (timeDiff >= snowTime) {
-                setTimeout(expandBox, snowTime);
+            let updatedSnowTime = snowTime;
+
+            // Update snowTime based on the current height range
+            if (height >= 0 && height < 100) {
+                updatedSnowTime = Math.max(3900 - height * 20, 4200);
+            } else if (height >= 100 && height < 200) {
+                updatedSnowTime = Math.max(3400 - (height - 100) * 20, 3900);
+            } else if (height >= 200 && height <= 350) {
+                updatedSnowTime = Math.max(3000 - (height - 200) * 20, 3400);
+            }
+
+            if (timeDiff >= updatedSnowTime) {
+                setTimeout(expandBox, updatedSnowTime);
             } else {
-                setTimeout(expandBox, snowTime - timeDiff);
+                setTimeout(expandBox, updatedSnowTime - timeDiff);
             }
 
             lastClickTime = currentTime;
-            snowTime -= 15;   // was 14
 
+            // Update snowTime only if it corresponds to the current height range
+            if (
+                (height >= 0 && height < 100 && snowTime !== Math.max(3900 - height * 20, 4200)) ||
+                (height >= 100 && height < 200 && snowTime !== Math.max(3400 - (height - 100) * 20, 3900)) ||
+                (height >= 200 && height <= 350 && snowTime !== Math.max(3000 - (height - 200) * 20, 3400))
+            ) {
+                snowTime = updatedSnowTime;
+            } else {
+                snowTime -= 15; // Decrease snowTime by 15 if it corresponds to the current height range
+            }
         }
+
 
         function expandBox() {
             const whiteBox = document.getElementById('whiteBox');
@@ -367,20 +442,14 @@
         }
 
         function increaseLevel() {
-            // Get the element containing the level number by its class
+
             var levelNumberElement = document.querySelector('.levelNumber');
-
-            // Get the current level number
             var currentLevel = parseInt(levelNumberElement.textContent);
-
-            // Increase the level by one
             var newLevel = currentLevel + 1;
-
-            // Update the content with the new level number
             levelNumberElement.textContent = newLevel;
 
             // get coins
-            let snowTime = 4200;
+            snowTime = 4200;
             coinsIncrease();
         }
 
@@ -389,11 +458,36 @@
             var currentCoins = parseInt(coinNumberElement.textContent);
             var newCoinAmount = currentCoins + 20;
             coinNumberElement.textContent = newCoinAmount;
+
+            tempIncrease();
+        }
+
+        function tempIncrease() {
+            var levelNumberElement = document.querySelector('.tempNumber');
+            var currentLevel = parseInt(levelNumberElement.textContent);
+            var newLevel = currentLevel + 2;
+            levelNumberElement.textContent = newLevel;
+
+            // show temp after level 1
+            var greyBlockElement = document.getElementById('blockToHide');
+            greyBlockElement.style.visibility = 'hidden';
+
+            // start temp physics
+            setInterval(decreaseHeight, 400); // 1px every 800ms
+        }
+
+        function decreaseHeight() {
+            const whiteBox = document.getElementById('whiteBox');
+
+            if (height > 0) {
+                height--;
+                whiteBox.style.height = height + 'px';
+            }
         }
 
         function checkWindowSize() {
-            const minWidth = 700; // Minimum width required
-            const minHeight = 700; // Minimum height required
+            const minWidth = 700;
+            const minHeight = 700;
 
             const currentWidth = window.innerWidth;
             const currentHeight = window.innerHeight;
@@ -420,6 +514,20 @@
             if (currentCoins >= 50) {
                 var newCoinAmount = currentCoins - 50;
                 coinNumberElement.textContent = newCoinAmount;
+                snowflakeDensity += 2;
+                increaseSPLevel();
+            } 
+        }
+
+        function upgradeBB() {
+            var coinNumberElement = document.querySelector('.coinsNumber');
+            var currentCoins = parseInt(coinNumberElement.textContent);
+
+            if (currentCoins >= 20) {
+                var newCoinAmount = currentCoins - 20;
+                coinNumberElement.textContent = newCoinAmount;
+                bonusCoinAmount += 5;
+                increaseBBLevel();
             }
         }
 
@@ -435,9 +543,30 @@
             }
             else {
                 progressBar.style.width = 0 + '%';
-                var newCoinAmount = currentCoins + 5;
+                var newCoinAmount = currentCoins + bonusCoinAmount;
                 coinNumberElement.textContent = newCoinAmount;
             }
+        }
+
+        function increaseSPLevel() {
+            var levelNumberElement = document.querySelector('.upgradeLevelSP');
+            var currentLevel = parseInt(levelNumberElement.textContent);
+            var newLevel = currentLevel + 1;
+            levelNumberElement.textContent = newLevel;
+        }
+
+        function increaseBBLevel() {
+            // update level on upgrade
+            var levelNumberElement = document.querySelector('.upgradeLevelBB');
+            var currentLevel = parseInt(levelNumberElement.textContent);
+            var newLevel = currentLevel + 1;
+            levelNumberElement.textContent = newLevel;
+
+            // update bonus value on progress bar
+            var BBNumber = document.querySelector('.progress-text');
+            var currentBB = parseInt(BBNumber.textContent);
+            var newBB = currentBB + 5;
+            BBNumber.textContent = newBB;
         }
 
 
