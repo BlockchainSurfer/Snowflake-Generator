@@ -1,5 +1,12 @@
 <!DOCTYPE html>
+<title>The Snowflake Game</title>
 <html>
+
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1399294839485685"
+    crossorigin="anonymous"></script>
+    
+    <link rel="shortcut icon" type="x-icon" href="white-snowflake.png">
+
 <style>
   body {
     background-color: #212121;
@@ -206,6 +213,49 @@
     text-align: center;
 }
 
+.helpOverlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 9999;
+}
+
+.helpMessage {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    font-size: 16px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.closeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: black;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-style: bold;
+    transition: 0.3s;
+}
+
+.closeButton:hover {
+    transition: 0.3s;
+    transform: scale(112%);
+}
+
 .progress-container {
             width: 228px;
             height: 25px;
@@ -302,16 +352,55 @@
         font-size: 25px;
     }
 
+    .QButton {
+        background-color: darkcyan;
+        position: fixed;
+        height: 30px;
+        width: 30px;
+        border-radius: 15px;
+        font-size: 24px;
+        font-family: comic;
+        top: 10px;
+        right: 228px;
+        color: whitesmoke;
+        border: transparent;
+        border-width: 0;
+        transition: 0.2s;
+    }
+
+    .QButton:hover {
+        transform: scale(108%);
+        transition: 0.2s;
+    }
+
+    .QButton:active {
+        background-color: rgb(1, 124, 124);
+    }
+
+    .helpHeader {
+        font-size: 24px;
+        padding-top: 1px;
+    }
+
+    .helpLeft {
+        text-align: left;
+    }
+
+
 
 </style>
 
 <body>
+
+    <!--Add question mark icon with helpful info-->
 
     <p class="mainStats">
         Level <span class="levelNumber">1</span><br>
         Coins: <span class="coinsNumber">0</span><br>
         Temp: <span class="tempNumber">0</span><span class="smth">&#xb0;</span>
     </p>
+
+    <button class="QButton" onclick="openHelp()">?</button>
 
     <div class="greyBlock" id="blockToHide"></div>
 
@@ -353,6 +442,24 @@
             <p>Please resize your window to meet the required dimensions. Thanks! :)</p>
         </div>
     </div>
+
+    <div class="helpOverlay" id="helpOverlay">
+        <div class="helpMessage">
+            <button class="closeButton" onclick="closeOverlay()">x</button>
+            <p><span class="helpHeader">The Snowflake Game</span><br><br>
+            <b>Goal:</b> Reach the highest level ever!<br><br>
+            <div class="helpLeft">The Snowflake Game is a game you can play whenever you want to relax, or if you want to
+            become an unstopable snowflake <b>MACHINE!</b> It's a free online game that is easy to learn, but hard
+            to dominate!<br><br>
+            Temp: When you reach the next level the temperature will increase and melt the snow. The higher
+            the level, the faster the snow melts. You better keep up!
+
+        </div>
+            </p>
+        </div>
+    </div>
+    
+    
 
     <div class="fillLine">Fill snow up to here</div>
 
@@ -486,7 +593,7 @@
         }
 
         function checkWindowSize() {
-            const minWidth = 700;
+            const minWidth = 800;
             const minHeight = 700;
 
             const currentWidth = window.innerWidth;
@@ -506,6 +613,16 @@
         // Check window size on load and resize
         window.addEventListener('load', checkWindowSize);
         window.addEventListener('resize', checkWindowSize);
+
+        function openHelp() {
+            document.getElementById('helpOverlay').style.display = 'block';
+        }
+
+        function closeOverlay() {
+    var overlay = document.getElementById('helpOverlay');
+    overlay.style.display = 'none'; // Hides the overlay by setting its display to 'none'
+}
+
 
         function upgradeDensity() {
             var coinNumberElement = document.querySelector('.coinsNumber');
@@ -568,6 +685,9 @@
             var newBB = currentBB + 5;
             BBNumber.textContent = newBB;
         }
+
+        // localStorage settings
+        
 
 
     </script>
