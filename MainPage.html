@@ -386,6 +386,14 @@
         text-align: left;
     }
 
+    .eventRate {
+        color: whitesmoke;
+        position: fixed;
+        top: 125px;
+        font-size: 18px;
+        right: 15px;
+    }
+
 
 
 </style>
@@ -405,7 +413,7 @@
     <div class="greyBlock" id="blockToHide"></div>
 
     <div class="mainbutton">
-        <button class="coolbutton" onclick="circleDrop(); startDelay(); increaseProgress()">
+        <button class="coolbutton" onclick="circleDrop(); startDelay(); increaseProgress()" tabindex="-1">
             <p class="bigtext">Make it rain!</p>
             <p class="smalltext">(it's cold outside)</p>
         </button>
@@ -459,9 +467,15 @@
         </div>
     </div>
     
+    <div class="eventRate" id="eventRate">SF/s: 0</div>
+    
     
 
     <div class="fillLine">Fill snow up to here</div>
+
+    <!-- Ezoic - bottom_of_page - bottom_of_page -->
+<div id="ezoic-pub-ad-placeholder-103"> </div>
+<!-- End Ezoic - bottom_of_page - bottom_of_page -->
 
     <div id="whiteBox"></div>
 
@@ -471,8 +485,9 @@
         let lastClickTime = 0;
         let snowflakes = 0;
         let snowTime = 4200;
-        let snowflakeDensity = 5;
-        let bonusCoinAmount = 5
+        let snowflakeDensity = 6;
+        let bonusCoinAmount = 5;
+        let eventCount = 0;
 
         function circleDrop() {
             const fallingCircle = document.createElement('img');
@@ -580,7 +595,7 @@
             greyBlockElement.style.visibility = 'hidden';
 
             // start temp physics
-            setInterval(decreaseHeight, 400); // 1px every 800ms
+            setInterval(decreaseHeight, 350); // 1px every 350ms
         }
 
         function decreaseHeight() {
@@ -663,6 +678,7 @@
                 var newCoinAmount = currentCoins + bonusCoinAmount;
                 coinNumberElement.textContent = newCoinAmount;
             }
+            eventCount++;
         }
 
         function increaseSPLevel() {
@@ -686,8 +702,13 @@
             BBNumber.textContent = newBB;
         }
 
-        // localStorage settings
-        
+        // snowflakes per second tracker
+        setInterval(updateEventRate, 1000); // Update every second
+
+function updateEventRate() {
+  document.getElementById('eventRate').innerText = `SF/s: ${eventCount}`;
+  eventCount = 0; // Reset count for the next second
+}
 
 
     </script>
