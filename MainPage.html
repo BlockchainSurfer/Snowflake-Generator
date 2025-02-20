@@ -8,6 +8,10 @@
     <link rel="shortcut icon" type="x-icon" href="white-snowflake.png">
 
 <style>
+html, body {
+    touch-action: none;
+}
+
   body {
     background-color: #212121;
     overflow: hidden;
@@ -103,6 +107,23 @@
         color: red;
     }
 
+    .aqua {
+        color: rgb(1, 223, 223);
+    }
+
+    .gold {
+        color: rgb(233, 198, 1);
+    }
+
+    .red {
+        color: red;
+    }
+
+    .versionNum {
+        text-align: center;
+        color: rgba(0, 0, 0, 0.5);
+    }
+
   .button-container {
         border: 1px solid #ccc;
         padding: 20px;
@@ -118,7 +139,7 @@
         right: 8px;
         top: 10px;
         position: fixed;
-        padding-bottom: 60px;
+        padding-bottom: 160px;
 
       }
 
@@ -171,6 +192,83 @@
             transition: 0.3s;
         }
 
+        .button3 {
+        padding: 0 18px;
+        font-size: 13px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin: 5px 5px;
+        border: transparent;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        transition: 0.2s;
+        background-color: whitesmoke;
+        width: 94px;
+        height: 55px;
+        text-align: center;
+        top: 114px;
+        position: fixed;
+        right: 114px;
+    }
+
+        .button3:hover {
+            background-color: lightgray;
+            transform: scale(103%);
+            transition: 0.3s;
+        }
+
+        .button3Lock {
+            position: fixed;
+            width: 94px;
+            height: 55px;
+            top: 114px;
+            right: 114px;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: whitesmoke;
+            text-align: center;
+            margin: 5px 5px;
+            border-radius: 4px;
+            font-size: 19px;
+        }
+
+        .button4Lock {
+            position: fixed;
+            width: 94px;
+            height: 55px;
+            top: 114px;
+            right: 10px;
+            background-color: rgba(0, 0, 0, 0.85);
+            color: whitesmoke;
+            text-align: center;
+            margin: 5px 5px;
+            border-radius: 4px;
+            font-size: 19px;
+        }
+
+        .button4 {
+        padding: 0 18px;
+        font-size: 13px;
+        cursor: pointer;
+        border-radius: 5px;
+        margin: 5px 5px;
+        border: transparent;
+        font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        transition: 0.2s;
+        background-color: whitesmoke;
+        width: 94px;
+        height: 55px;
+        text-align: center;
+        top: 114px;
+        position: fixed;
+        right: 10px;
+
+    }
+
+        .button4:hover {
+            background-color: lightgray;
+            transform: scale(103%);
+            transition: 0.3s;
+        }
+
     .blackBox1 {
         width: 96px;
         height: 55px;
@@ -189,6 +287,26 @@
         position: fixed;
         right: 14px;
         top: 38px;
+    }
+
+    .blackBox3 {
+        width: 96px;
+        height: 55px;
+        border-radius: 5px;
+        background-color: #1D1D1D;
+        position: fixed;
+        right: 118px;
+        top: 140px;
+    }
+
+    .blackBox4 {
+        width: 96px;
+        height: 55px;
+        border-radius: 5px;
+        background-color: #1D1D1D;
+        position: fixed;
+        right: 14px;
+        top: 140px;
     }
 
       .overlay {
@@ -235,6 +353,8 @@
     text-align: center;
     font-size: 16px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    width: 500px;
+    background-color: whitesmoke;
 }
 
 .closeButton {
@@ -271,7 +391,7 @@
         .progress-bar {
             width: 0;
             height: 100%;
-            background-color: gold;
+            background-color: rgb(209, 178, 1);
             border-radius: 10px;
             transition: width 0.3s ease-in-out;
         }
@@ -315,6 +435,22 @@
         font-size: 17px;
     }
 
+    .priceNumber3 {
+        position: fixed;
+        right: 152px;
+        top: 175px;
+        color: gold;
+        font-size: 17px;
+    }
+
+    .priceNumber4 {
+        position: fixed;
+        right: 49px;
+        top: 175px;
+        color: gold;
+        font-size: 17px;
+    }
+
     .upgradeLevelStyle1 {
         color: whitesmoke;
         font-size: 17px;
@@ -331,11 +467,35 @@
         top: 93px;
     }
 
+    .upgradeLevelStyle3 {
+        color: whitesmoke;
+        font-size: 17px;
+        position: fixed;
+        right: 144px;
+        top: 195px;
+    }
+
+    .upgradeLevelStyle4 {
+        color: whitesmoke;
+        font-size: 17px;
+        position: fixed;
+        right: 42px;
+        top: 195px;
+    }
+
     .upgradeLevelSP {
         font-size: 20px;
     }
 
     .upgradeLevelBB {
+        font-size: 20px;
+    }
+
+    .upgradeLevelSPC {
+        font-size: 20px;
+    }
+
+    .upgradeLevelSM {
         font-size: 20px;
     }
 
@@ -389,9 +549,19 @@
     .eventRate {
         color: whitesmoke;
         position: fixed;
-        top: 125px;
+        top: 222px;
         font-size: 18px;
-        right: 15px;
+        right: 10px;
+    }
+
+    .lockSize {
+        font-size: 20px;
+    }
+
+    .tags {
+        position: fixed;
+        color: #212121;
+        top: 2500px;
     }
 
 
@@ -413,7 +583,7 @@
     <div class="greyBlock" id="blockToHide"></div>
 
     <div class="mainbutton">
-        <button class="coolbutton" onclick="circleDrop(); startDelay(); increaseProgress()" tabindex="-1">
+        <button class="coolbutton" id="coolButton" onclick="circleDrop(); startDelay(); increaseProgress()" tabindex="-1">
             <p class="bigtext">Make it rain!</p>
             <p class="smalltext">(it's cold outside)</p>
         </button>
@@ -428,8 +598,15 @@
     </div>
     <div class="blackBox1"></div>
     <div class="blackBox2"></div>
+    <div class="blackBox3"></div>
+    <div class="blackBox4"></div>
     <button class="button1" onclick="upgradeDensity()">Upgrade Snowflake Power</button>
     <button class="button2" onclick="upgradeBB()">Upgrade Bonus Bar</button>
+    <button class="button3" onclick="upgradeSC()">+1 Snowflake Per Click</button>
+    <button class="button4" onclick="upgradeSM()">Upgrade Snow Machine</button>
+
+    <div class="button3Lock" id="lock3"><span class="lockSize">&#128274;</span><br>Level 6</div>
+    <div class="button4Lock" id="lock4"><span class="lockSize">&#128274;</span><br>Level 12</div>
 
     <span class="priceNumber1">
         50
@@ -437,12 +614,24 @@
     <span class="priceNumber2">
         20
     </span>
+    <span class="priceNumber3">
+        300
+    </span>
+    <span class="priceNumber4">
+        400
+    </span>
 
     <div class="upgradeLevelStyle1">
         Lvl. <span class="upgradeLevelSP">1</span>
     </div>
     <div class="upgradeLevelStyle2">
         Lvl. <span class="upgradeLevelBB">1</span>
+    </div>
+    <div class="upgradeLevelStyle3">
+        Lvl. <span class="upgradeLevelSPC">1</span>
+    </div>
+    <div class="upgradeLevelStyle4">
+        Lvl. <span class="upgradeLevelSM">0</span>
     </div>
 
     <div class="overlay" id="overlay">
@@ -457,12 +646,18 @@
             <p><span class="helpHeader">The Snowflake Game</span><br><br>
             <b>Goal:</b> Reach the highest level ever!<br><br>
             <div class="helpLeft">The Snowflake Game is a game you can play whenever you want to relax, or if you want to
-            become an unstopable snowflake <b>MACHINE!</b> It's a free online game that is easy to learn, but hard
-            to dominate!<br><br>
-            Temp: When you reach the next level the temperature will increase and melt the snow. The higher
-            the level, the faster the snow melts. You better keep up!
-
+            become an unstopable snowflake <b>MACHINE!</b><br><br>
+            <span class="aqua"><b>Level</b></span>: When you reach the "Fill snow up to here" line, you will
+            reach the next level and recieve 25 COINS!<br>
+            <span class="gold"><b>Coins</b></span>: Earn coins by leveling up and filling up the bonus bar!<br>
+            <span class="red"><b>Temp</b></span>: Once you reach level 2, you will see the temperature pop up.
+            Every time you level up, the temperature will rise. This means the snow will melt faster. You better be able to keep up!<br><br>
+            <b>Shop</b>: This is where you will spend your coins to upgrade all types of powers.<br>
+            <b>Bonus Bar</b>:The more you click, the more the bonus bar fills up! When it fills up, it will reset,
+            but you will also recieve coins!<br><br>
+            Tip: Once you click the "Make it rain!" button, you can also use your spacebar.<br><br>
         </div>
+        <span class="versionNum">Version 1.1</span>
             </p>
         </div>
     </div>
@@ -479,6 +674,11 @@
 
     <div id="whiteBox"></div>
 
+    <!-- TAGS -->
+    <span class="tags">free online game, website game, christmas game, holiday game
+        snowflake generator game, free online christmas game, the snowflake game, fun free online game
+    </span>
+
 
     <script>
         let height = 1;
@@ -488,6 +688,7 @@
         let snowflakeDensity = 6;
         let bonusCoinAmount = 5;
         let eventCount = 0;
+        let SCLevel = 0;
 
         function circleDrop() {
             const fallingCircle = document.createElement('img');
@@ -512,6 +713,7 @@
                 }
             });
             snowflakes++;
+            eventCount++;
         }
 
         function startDelay() {
@@ -573,12 +775,22 @@
             // get coins
             snowTime = 4200;
             coinsIncrease();
+
+            // hide locks
+            if (newLevel == 6) {
+                var divToHide = document.getElementById("lock3");
+                divToHide.style.display = "none";
+            }
+            if (newLevel == 12) {
+                var divToHide = document.getElementById("lock4");
+                divToHide.style.display = "none";
+            }
         }
 
         function coinsIncrease() {
             var coinNumberElement = document.querySelector('.coinsNumber');
             var currentCoins = parseInt(coinNumberElement.textContent);
-            var newCoinAmount = currentCoins + 20;
+            var newCoinAmount = currentCoins + 25;
             coinNumberElement.textContent = newCoinAmount;
 
             tempIncrease();
@@ -587,12 +799,15 @@
         function tempIncrease() {
             var levelNumberElement = document.querySelector('.tempNumber');
             var currentLevel = parseInt(levelNumberElement.textContent);
-            var newLevel = currentLevel + 2;
+            var newLevel = currentLevel + 4;
             levelNumberElement.textContent = newLevel;
 
             // show temp after level 1
             var greyBlockElement = document.getElementById('blockToHide');
             greyBlockElement.style.visibility = 'hidden';
+
+            // decrease SF Power
+            snowflakeDensity--;
 
             // start temp physics
             setInterval(decreaseHeight, 350); // 1px every 350ms
@@ -609,7 +824,7 @@
 
         function checkWindowSize() {
             const minWidth = 800;
-            const minHeight = 700;
+            const minHeight = 650;
 
             const currentWidth = window.innerWidth;
             const currentHeight = window.innerHeight;
@@ -646,7 +861,7 @@
             if (currentCoins >= 50) {
                 var newCoinAmount = currentCoins - 50;
                 coinNumberElement.textContent = newCoinAmount;
-                snowflakeDensity += 2;
+                snowflakeDensity += 3;
                 increaseSPLevel();
             } 
         }
@@ -678,7 +893,6 @@
                 var newCoinAmount = currentCoins + bonusCoinAmount;
                 coinNumberElement.textContent = newCoinAmount;
             }
-            eventCount++;
         }
 
         function increaseSPLevel() {
@@ -687,6 +901,38 @@
             var newLevel = currentLevel + 1;
             levelNumberElement.textContent = newLevel;
         }
+
+        function increaseSPCLevel() {
+            var levelNumberElement = document.querySelector('.upgradeLevelSPC');
+            var currentLevel = parseInt(levelNumberElement.textContent);
+            var newLevel = currentLevel + 1;
+            levelNumberElement.textContent = newLevel;
+        }
+
+        function increaseSMLevel() {
+            var levelNumberElement = document.querySelector('.upgradeLevelSM');
+            var currentLevel = parseInt(levelNumberElement.textContent);
+            var newLevel = currentLevel + 1;
+            levelNumberElement.textContent = newLevel;
+        }
+
+        function upgradeSM() {
+            var coinNumberElement = document.querySelector('.coinsNumber');
+            var currentCoins = parseInt(coinNumberElement.textContent);
+
+            if (currentCoins >= 400) {
+                var newCoinAmount = currentCoins - 400;
+                coinNumberElement.textContent = newCoinAmount;
+                bonusCoinAmount += 5;
+                setInterval(function () {
+                    circleDrop();
+                    startDelay();
+                    }, 1000);
+                increaseSMLevel();
+            }
+        }
+
+
 
         function increaseBBLevel() {
             // update level on upgrade
@@ -702,6 +948,33 @@
             BBNumber.textContent = newBB;
         }
 
+        document.getElementById("coolButton").addEventListener("click", function() {
+        // Function to execute when "coolButton" is clicked
+         // buttonClicked();
+         buttonClicked();
+        });
+
+        function buttonClicked() {
+            for (let i = 0; i < SCLevel; i++) {
+                setTimeout(function () {
+  circleDrop();
+  startDelay();
+}, 150);
+    }
+        }
+
+        function upgradeSC() {
+            var coinNumberElement = document.querySelector('.coinsNumber');
+            var currentCoins = parseInt(coinNumberElement.textContent);
+
+            if (currentCoins >= 300) {
+                var newCoinAmount = currentCoins - 300;
+                coinNumberElement.textContent = newCoinAmount;
+                SCLevel++;
+                increaseSPCLevel();
+            }
+        }
+
         // snowflakes per second tracker
         setInterval(updateEventRate, 1000); // Update every second
 
@@ -709,6 +982,12 @@ function updateEventRate() {
   document.getElementById('eventRate').innerText = `SF/s: ${eventCount}`;
   eventCount = 0; // Reset count for the next second
 }
+
+// disable scrolling on mobile
+document.addEventListener('touchmove', function(e) {
+    e.preventDefault();
+}, { passive: false });
+
 
 
     </script>
